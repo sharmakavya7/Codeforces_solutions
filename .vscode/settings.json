@@ -15,6 +15,7 @@
         "xlocale": "cpp",
         "unordered_map": "cpp",
         "stack": "cpp",
-        "cstdlib": "cpp"
+        "cstdlib": "cpp",
+        "string": "cpp"
     }
 }
