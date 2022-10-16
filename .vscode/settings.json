@@ -16,6 +16,8 @@
         "unordered_map": "cpp",
         "stack": "cpp",
         "cstdlib": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "xiosbase": "cpp",
+        "xutility": "cpp"
     }
 }
