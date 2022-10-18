@@ -19,6 +19,7 @@
         "string": "cpp",
         "xiosbase": "cpp",
         "xutility": "cpp",
-        "cmath": "cpp"
+        "cmath": "cpp",
+        "ios": "cpp"
     }
 }
