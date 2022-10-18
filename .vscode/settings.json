@@ -18,6 +18,7 @@
         "cstdlib": "cpp",
         "string": "cpp",
         "xiosbase": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "cmath": "cpp"
     }
 }
