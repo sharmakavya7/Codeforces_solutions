@@ -72,34 +72,63 @@ using namespace std;
 # define line cout<<"\n";
 #define fast ios_base::sync_with_stdio(false); cin.tie(0);
 
-int n, k, a, b, cnt=0;
 string s;
+int n;
 
 void solve() {
-    cin>>n>>k>>s;
-    for(int i=0,j=0;i<n;i++) {
-		if(s[i]=='a') {
-            a++;
-        }
-        else b++;
+    cin >> n >> s;
+    int firstOne = -1;
+    for(int i=0; i<=n; i++) {
+        cout << s[i] ;
+    }
+    int ans = 0;
+    bool flag = 0;
+    // while(i <= n) {
+    for(int i=0; i<n; i++) {
         
-        while(min(a, b) > k) {
-            if(s[j] =='a') {
-                a--;
-            } 
-            else {
-                b--;
+        if(flag == 0) {
+            cout <<"i:"<<i<<" s[i]:" << s[i]<<" ";
+            if(s[i] == '1' && firstOne == -1) {
+                firstOne = i;
+                // cout << "yo ";
+                cout << "first:"<<firstOne<<" ";
             }
-			j++;
-		}
-        cnt=max(cnt, a + b);
-	}
-	cout << cnt; line
+            else if(s[i] == '0' && firstOne < i && firstOne != -1) {
+                // cout << s[i] << " ";
+                // cout<<" no ";
+                i = firstOne;
+                // cout <<"i: "<<i << " yha: "<<firstOne <<" ";
+                firstOne = -1;
+                
+                flag = 1;
+                ans++;
+            }
+        }
+        if(flag == 1) {
+            cout <<"ni:"<<i<<" ns[i]:" << !s[i]<<" ";
+            if(!s[i] == '1' && firstOne == -1) {
+                firstOne = i;
+            }
+            else if(!s[i] == '0' && firstOne < i && firstOne != -1) {
+                i = firstOne;
+                firstOne = -1;
+                flag = 0;
+                ans++;
+            }
+        }
+        line
+        // i++;
+    }
+    cout << ans; 
+    line
 }
 
 int main() {
     fast;
-    solve();
+    int t;
+    cin >> t;
+    while(t--) {
+        solve();
+    }
     return 0;
 }
-

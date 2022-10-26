@@ -71,35 +71,58 @@ using namespace std;
 # define mp make_pair
 # define line cout<<"\n";
 #define fast ios_base::sync_with_stdio(false); cin.tie(0);
+ll __gcd(ll a,ll b) {
+	if(a!=0)return __gcd(b%a,a);
+	return b;
+}
 
-int n, k, a, b, cnt=0;
-string s;
+const int N = 3e5 + 2;
+ll a, b;
+// int a[N];
+
+void input() {
+    cin >> a >> b;
+}
 
 void solve() {
-    cin>>n>>k>>s;
-    for(int i=0,j=0;i<n;i++) {
-		if(s[i]=='a') {
-            a++;
+    input();
+    if(b % a == 0) {
+        // cout << a <<" " << b<<" ";
+        cout <<"YES"; line;
+        return;
+    }  
+    if(b%a==0)  {
+        cout << "YES";line;
+        return;
+    } 
+    else { 
+        if (b>2*a) { 
+            cout <<"YES"; line;
         }
-        else b++;
-        
-        while(min(a, b) > k) {
-            if(s[j] =='a') {
-                a--;
-            } 
-            else {
-                b--;
-            }
-			j++;
-		}
-        cnt=max(cnt, a + b);
-	}
-	cout << cnt; line
+        else {
+            cout <<"NO"; line;
+        }
+    } 
+    // if(a + 1 == b && a > 1) {
+    //     cout << a << " " << b<<" ";
+    //     cout <<"NO"; line;
+    //     return;
+    // }
+    // while(b % a != 0) {
+    //     b++; a++;
+    // }
+    // cout << a <<" " << b<<" "; line
 }
+
+// 10 -> YES
+// 11 -> YES
+// 12 -> YES
 
 int main() {
-    fast;
-    solve();
+    int t;
+    cin >> t;
+    while(t--) {
+        solve();
+    }
     return 0;
 }
-

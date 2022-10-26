@@ -72,34 +72,33 @@ using namespace std;
 # define line cout<<"\n";
 #define fast ios_base::sync_with_stdio(false); cin.tie(0);
 
-int n, k, a, b, cnt=0;
-string s;
+int const N = 300000 + 5;
+// ll a[N], b[N];
 
 void solve() {
-    cin>>n>>k>>s;
-    for(int i=0,j=0;i<n;i++) {
-		if(s[i]=='a') {
-            a++;
-        }
-        else b++;
-        
-        while(min(a, b) > k) {
-            if(s[j] =='a') {
-                a--;
-            } 
-            else {
-                b--;
-            }
-			j++;
-		}
-        cnt=max(cnt, a + b);
-	}
-	cout << cnt; line
+    int n;
+    cin>>n;
+    ll a[N],b[N];  // change to n (doesn't work in VS code, but it's correct)
+    for(int i=0;i<n;i++) {
+        cin>>a[i]>>b[i];
+    }
+    ll ans=0;
+    ll mn=1e15;
+    for(int i=0;i<n;i++){
+        ll in=(i+1)%n;
+        ans+=max(0LL,a[in]-b[i]);
+        mn=min(mn,a[in]-max(0LL,a[in]-b[i]));
+
+    }
+
+    cout<<mn+ans<<"\n";
 }
 
 int main() {
     fast;
-    solve();
-    return 0;
+    ll t;
+    cin >> t;
+    while(t--) {
+        solve();
+    }
 }
-

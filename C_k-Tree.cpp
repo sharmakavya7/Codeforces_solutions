@@ -70,36 +70,70 @@ using namespace std;
 # define S second
 # define mp make_pair
 # define line cout<<"\n";
-#define fast ios_base::sync_with_stdio(false); cin.tie(0);
+const int mod= (int)1e9+7;
+# define fast ios_base::sync_with_stdio(false); cin.tie(0);
+ll __gcd(ll a,ll b) {
+	if(a!=0)return __gcd(b%a,a);
+	return b;
+}
 
-int n, k, a, b, cnt=0;
-string s;
+const int N = 200 + 5;
+ll n, k, d, max_wt = 0, ways = 0;
+ll dp[N][N];
 
-void solve() {
-    cin>>n>>k>>s;
-    for(int i=0,j=0;i<n;i++) {
-		if(s[i]=='a') {
-            a++;
+void input() {
+    cin >> n >> k >> d;
+}
+
+int solve(int n, int max_wt) {
+    // base case
+    if(n < 0) {
+        return 0;
+    }
+    if(n == 0) {
+        if(max_wt >= d) {
+            // cout <<"d: "<<d << " max_wt: " << max_wt<<" ";
+            return 1;
         }
-        else b++;
-        
-        while(min(a, b) > k) {
-            if(s[j] =='a') {
-                a--;
-            } 
-            else {
-                b--;
-            }
-			j++;
-		}
-        cnt=max(cnt, a + b);
-	}
-	cout << cnt; line
+        return 0;
+    }
+    if(dp[n][max_wt] != -1) {
+        return dp[n][max_wt];
+    }
+
+    int ways = 0;
+    // cout << ways<<" ";
+    for(int i=1; i<=k; i++) {
+        // cout << "i: " << i <<" n: "<<n<< " ways: " << ways <<" "; line;
+        ways += solve(n - i, max(max_wt, i));
+        ways %= mod;
+    }
+    ways %= mod;
+    return dp[n][max_wt] = ways;
+}
+
+void global() {
+    // fill_n(dp, n, 0);
+    max_wt = 0, ways = 0;
+    for(int i=0; i<N; i++) {
+        for(int j=0; j<N; j++) {
+            dp[i][j] = -1;
+        }
+    }
 }
 
 int main() {
-    fast;
-    solve();
+    input();
+    memset(dp, -1, sizeof(dp));
+    cout << solve(n, 0);
+    global();
     return 0;
 }
 
+
+
+// dp[total weight required][max weight so far] 
+//        |
+// n is total wt we want and remaining wt after considering the curr edge would be => n - i
+// n - i in the next call will be n, and when this d will become 0, we'll enter in base case
+// in base case we need to check if the max wt so far is greater than or equal to d

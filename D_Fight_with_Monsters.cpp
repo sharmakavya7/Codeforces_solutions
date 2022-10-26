@@ -72,34 +72,25 @@ using namespace std;
 # define line cout<<"\n";
 #define fast ios_base::sync_with_stdio(false); cin.tie(0);
 
-int n, k, a, b, cnt=0;
-string s;
+int n, a, b, k, h, s[200005], ans;
 
-void solve() {
-    cin>>n>>k>>s;
-    for(int i=0,j=0;i<n;i++) {
-		if(s[i]=='a') {
-            a++;
-        }
-        else b++;
-        
-        while(min(a, b) > k) {
-            if(s[j] =='a') {
-                a--;
-            } 
-            else {
-                b--;
-            }
-			j++;
-		}
-        cnt=max(cnt, a + b);
+int main () {
+
+	cin >> n >> a >> b >> k;
+
+	for (int i = 0; i < n; i++){
+		cin >> h;
+		h = (h - 1) % (a + b) + 1;
+		s[i] = (h - 1) / a;
 	}
-	cout << cnt; line
-}
+	sort(s, s + n);
 
-int main() {
-    fast;
-    solve();
+	for (int i = 0; i < n; i++) {
+		if (s[i] <= k) {
+			ans++;
+			k -= s[i];
+		}
+    }
+	cout << ans; line
     return 0;
 }
-

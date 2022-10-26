@@ -71,35 +71,47 @@ using namespace std;
 # define mp make_pair
 # define line cout<<"\n";
 #define fast ios_base::sync_with_stdio(false); cin.tie(0);
+ll __gcd(ll a,ll b) {
+	if(a!=0)return __gcd(b%a,a);
+	return b;
+}
 
-int n, k, a, b, cnt=0;
-string s;
+const int N = 5000 + 2;
+int n, a[N];
+
+
 
 void solve() {
-    cin>>n>>k>>s;
-    for(int i=0,j=0;i<n;i++) {
-		if(s[i]=='a') {
-            a++;
-        }
-        else b++;
-        
-        while(min(a, b) > k) {
-            if(s[j] =='a') {
-                a--;
-            } 
-            else {
-                b--;
-            }
-			j++;
-		}
-        cnt=max(cnt, a + b);
-	}
-	cout << cnt; line
+    cin >> n;
+
+    for(int i=0;i<n;i++) 
+        cin>>a[i];
+
+    int g=a[0];
+    for(int i=1;i<n;i++) 
+        g=__gcd(a[i],g);
+
+    if(g==1) {
+        cout << 0;
+        return;
+    }
+    else if(__gcd(g,n)==1) {
+        cout << 1;
+        return;
+    }
+    else if(__gcd(g,n-1)==1) {
+        cout << 2;
+        return;
+    }
+    else cout << 3;
 }
 
 int main() {
-    fast;
-    solve();
+    int t;
+    cin >> t;
+    while(t--) {
+        solve();
+        line
+    }
     return 0;
 }
-
