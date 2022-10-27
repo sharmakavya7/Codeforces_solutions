@@ -18,54 +18,18 @@
 #include <stack>
 using namespace std;
  
-# define C continue;
-# define R return
- 
 # define D double
 # define I insert
 # define ll long long
 # define ld long double
- 
-# define ull unsigned long long
-# define ui unsigned int
- 
-# define pb push_back
-# define pf push_front
- 
-# define vi vector < int >
-# define vc vector < char >
-# define vs vector < string >
-# define vb vector < bool >
-# define vd vector < D >
-# define vll vector < ll >
-# define vull vector < ull >
-# define vld vector < ld >
-# define PQ priority_queue
- 
-# define vvi vector < vector < int > >
-# define vvb vector < vector < bool > >
-# define vvc vector < vector < char > >
-# define vvs vector < vs >
-# define vvll vector < vector < ll > >
-# define vvd vector < vector < D > >
-# define vvld vector < vector < ld > >
- 
+
 # define all(v) (v).begin() , (v).end()
 # define allrev(v) (v).rbegin() , (v).rend()
-# define allcomp(v) v.begin() , v.end() , comp
-# define allrevcomp(v) v.rbegin() , v.rend() , comp
+# define allcomp(v) (v).begin() , (v).end() , comp
  
 # define pii pair < int , int >
 # define pll pair < ll , ll >
-# define pld pair < ld , ld >
-# define pDD pair < D , D >
- 
-# define vpld vector < pld >
-# define vpii vector < pii >
-# define vpll vector < pll >
-# define vpDD vector < pDD >
- 
-# define vvpii vector < vector < pii > >
+
 # define F first
 # define S second
 # define mp make_pair
@@ -101,7 +65,7 @@ int solve(int n, int max_wt) {
         return dp[n][max_wt];
     }
 
-    int ways = 0;
+    ways = 0;
     // cout << ways<<" ";
     for(int i=1; i<=k; i++) {
         // cout << "i: " << i <<" n: "<<n<< " ways: " << ways <<" "; line;
@@ -112,21 +76,10 @@ int solve(int n, int max_wt) {
     return dp[n][max_wt] = ways;
 }
 
-void global() {
-    // fill_n(dp, n, 0);
-    max_wt = 0, ways = 0;
-    for(int i=0; i<N; i++) {
-        for(int j=0; j<N; j++) {
-            dp[i][j] = -1;
-        }
-    }
-}
-
 int main() {
     input();
     memset(dp, -1, sizeof(dp));
     cout << solve(n, 0);
-    global();
     return 0;
 }
 
