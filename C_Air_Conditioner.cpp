@@ -50,7 +50,7 @@ void input() {
 
 void solve() {
     input();
-    ll prev_time = 0, mini_temp = m, maxi_temp = m;
+    ll prev_time = 0, mini_temp = m, maxi_temp = m, flag = 1;;
     // ll time_dif = m; int temp_dif = m;
     for(int i=0; i<n; i++) {
         cin >> t >> l >> h;
@@ -68,11 +68,15 @@ void solve() {
         mini_temp = max(l, mini_temp);
 
         if(maxi_temp < mini_temp) {
-            cout <<"NO"; line;
-            return;
+            flag = 0;
         }
     }
-    cout<<"YES"; line;
+    if(flag) {
+        cout<<"YES"; line;
+    }
+    else {
+        cout << "NO"; line;
+    }
 }
 
 int main() {
@@ -83,3 +87,5 @@ int main() {
     }
     return 0;
 }
+
+// Common sense
