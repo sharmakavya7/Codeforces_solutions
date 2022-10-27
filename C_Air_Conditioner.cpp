@@ -50,8 +50,8 @@ void input() {
 
 void solve() {
     input();
-    int prev_time = 0, mini_temp, maxi_temp;
-    int time_dif = m; int temp_dif = m;
+    ll prev_time = 0, mini_temp = m, maxi_temp = m;
+    // ll time_dif = m; int temp_dif = m;
     for(int i=0; i<n; i++) {
         cin >> t >> l >> h;
         // time_dif = t - prev_time;
@@ -72,6 +72,7 @@ void solve() {
             return;
         }
     }
+    cout<<"YES"; line;
 }
 
 int main() {
