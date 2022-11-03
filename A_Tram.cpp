@@ -43,25 +43,25 @@ void print(vector<int> vec){ for(int i=0; i<vec.size(); i++) {cout << vec[i]<<" 
 
 const int N = 1e5 + 2;
 
-ll n, m, k;
-string s;
-vector<int>a;
-int cnt = 0, sum = 0;
+ll n, m, k, a, b;
+string s, t;
+vector<int>v;
+int cnt = 0, sum = 0, res = 0;
+int matrix[5][5];
 
 void solve() {
-    cin >> n >> k;
+    cin >> n;
+    int cur = 0;
     for(int i=0; i<n; i++) {
-        int t;
-        cin >> t;
-        a.push_back(t);
-        // sum += a[i];
-    }
-    for(auto i=0; i<n; i++) {
-        if(a[i] >= a[k-1] && a[i] > 0) {
-            cnt++;
+        if(i == 0) {
+            cur += b;
         }
+        cin >> a >> b;
+        cur -= a;
+        cur += b;
+        res = max(cur, res);
     }
-    cout << cnt; line;
+    cout << res;
 }
 
 

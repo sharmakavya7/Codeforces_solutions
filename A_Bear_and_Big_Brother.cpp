@@ -47,21 +47,17 @@ ll n, m, k;
 string s;
 vector<int>a;
 int cnt = 0, sum = 0;
+int matrix[5][5];
 
 void solve() {
-    cin >> n >> k;
-    for(int i=0; i<n; i++) {
-        int t;
-        cin >> t;
-        a.push_back(t);
-        // sum += a[i];
+    cin >> n >> m;
+
+    while(n <= m) {
+        n *= 3;
+        m *= 2;
+        cnt++;
     }
-    for(auto i=0; i<n; i++) {
-        if(a[i] >= a[k-1] && a[i] > 0) {
-            cnt++;
-        }
-    }
-    cout << cnt; line;
+    cout << cnt; line; 
 }
 
 
