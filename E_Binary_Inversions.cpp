@@ -48,58 +48,44 @@ string s, t;
 // vector<int> v1, v2;
 int v[N], v1[N], v2[N];
 
+ll calc(ll cnt, ll ans, int arr[]) {
+    for(int i=0; i<n; i++) {
+        if(arr[i] == 1) {
+            cnt++;
+        } else {
+            ans += cnt;
+        }
+    }
+    return ans;
+}
+ 
 void solve() {
     cin >> n;
     for(int i=0; i<n; i++) {
         cin >> v[i];
-        v1[i] = v[i];
         v2[i] = v[i];
     }
-
-    ll cnt1 = 0, ans = 0;
-
+    
+    ll cnt1 = 0;
+    ll og = calc(cnt1, 0, v);
+    cnt1 = 0;
     for(int i=0; i<n; i++) {
-        if(v[i] == 0) {
+        if(v2[i] == 0) {
             v2[i] = 1;
             break;
         }
     }
-    
+    ll flipStart = calc(cnt1, 0, v2);
+    cnt1 = 0;
     for(int i=n-1; i>=0; i--) {
         if(v[i] == 1) {
-            v1[i] = 0;
+            v[i] = 0;
             break;
         }
     }
-    for(int i=0; i<n; i++) {
-        if(v1[i] == 1) {
-            cnt1++;
-        } else {
-            ans += cnt1;
-        }
-    }
-    ll maxi = ans;
-    ans = 0;
-    cnt1 = 0;
-    for(int i=0; i<n; i++) {
-        if(v2[i] == 1) {
-            cnt1++;
-        } else {
-            ans += cnt1;
-        }
-    }
-    maxi = max(maxi, ans);
-    ans = 0;
-    cnt1 = 0;
-    for(int i=0; i<n; i++) {
-        if(v[i] == 1) {
-            cnt1++;
-        } else {
-            ans += cnt1;
-        }
-    }
-    maxi = max(maxi, ans);
-
+    ll flipEnd = calc(cnt1, 0, v);
+    // cout << og <<" "<< flipStart <<" "<< flipEnd<<" ";
+    ll maxi = max(og, max(flipEnd, flipStart));
     cout << maxi; line;
 }
 
