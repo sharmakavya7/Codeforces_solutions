@@ -48,7 +48,6 @@ string s, t;
 // vector<int> v1, v2;
 int v1[N], v2[N];
 ll cnt = 0, sum = 0, res = 1, ans = 0;
-long long dp[N];
 
 void solve() {
     for(int i=0; i<3; i++) {

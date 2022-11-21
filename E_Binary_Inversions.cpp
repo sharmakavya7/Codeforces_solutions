@@ -48,17 +48,6 @@ string s, t;
 // vector<int> v1, v2;
 int v[N], v1[N], v2[N];
 
-// ll calc(int cnt, int ans, int arr[]) {
-//     for(int i=0; i<n; i++) {
-//         if(arr[i] == 1) {
-//             cnt++;
-//         } else {
-//             ans += cnt;
-//         }
-//     }
-//     return ans;
-// }
-
 void solve() {
     cin >> n;
     for(int i=0; i<n; i++) {
