@@ -46,49 +46,25 @@ const int N = 2e5+10;
 ll n, k, l, p, q, m, d, a, b;
 string s, t;
 // vector<int> v1, v2;
-int v[N], v1[N], v2[N];
+ll v[N], v1[N], v2[N];
  
 void solve() {
-    cin >> n;
+    cin >> s;
+    ll i = 0, n = s.size();
+    // while(i > n) {
     for(int i=0; i<n; i++) {
-        cin >> v[i];
-    }
-    ll mini = *min_element(v, v+n);
-    ll maxi = *max_element(v, v+n);
-
-    cout << maxi - mini << " ";
-
-    ll max_cnt = 0, min_cnt = 0;
-    for(int i=0; i<n; i++) {
-        if(v[i] == mini) {
-            min_cnt++;
+        int p = s[i] - '0';
+        if((i==0 && p == 9) || p <= 4) {
+            continue;
         }
-        else if(v[i] == maxi) {
-            max_cnt++;
-        }
+        // int change = 9 - p;
+        s[i] = (char) 9 - p + '0';
     }
-    if(maxi - mini == 0) {
-        cout << (n * (n-1)) / 2; line;
-    } else {
-        cout << max_cnt*min_cnt; line;
-    }
+    cout << s; line;
 }
 
 int main() {
     fast;
-    // ll t;
-    // cin >> t;
-    // while(t--) {
-    //     solve();
-    //     clear_global();
-    // }
     solve();
     return 0;
 }
-
-/*
-If all numbers are equal then answer will be n * (n - 1) / 2,
-otherwise the answer will be cnt1 * cnt2, 
-where cnt1 is the number of our maximum elements and 
-cnt2 is the number of our minimum elements.
-*/

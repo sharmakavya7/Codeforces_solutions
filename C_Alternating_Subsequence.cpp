@@ -46,49 +46,68 @@ const int N = 2e5+10;
 ll n, k, l, p, q, m, d, a, b;
 string s, t;
 // vector<int> v1, v2;
-int v[N], v1[N], v2[N];
+ll v[N], v1[N], v2[N];
  
 void solve() {
     cin >> n;
     for(int i=0; i<n; i++) {
         cin >> v[i];
     }
-    ll mini = *min_element(v, v+n);
-    ll maxi = *max_element(v, v+n);
-
-    cout << maxi - mini << " ";
-
-    ll max_cnt = 0, min_cnt = 0;
-    for(int i=0; i<n; i++) {
-        if(v[i] == mini) {
-            min_cnt++;
+    ll i=0, sum = 0;
+    while(i < n) {
+        ll maxi = v[i];
+        i++;
+        // same signs multiplication > 0 => same window => save window max
+        while(i < n && v[i]*v[i-1] > 0) {
+            maxi = max(v[i++], maxi);
         }
-        else if(v[i] == maxi) {
-            max_cnt++;
-        }
+        // add window max
+        sum += maxi;
     }
-    if(maxi - mini == 0) {
-        cout << (n * (n-1)) / 2; line;
-    } else {
-        cout << max_cnt*min_cnt; line;
-    }
+    
+    cout << sum; line;
 }
 
 int main() {
     fast;
-    // ll t;
-    // cin >> t;
-    // while(t--) {
-    //     solve();
-    //     clear_global();
-    // }
-    solve();
+    ll t;
+    cin >> t;
+    while(t--) {
+        solve();
+        // clear_global();
+    }
+    // solve();
     return 0;
 }
 
 /*
-If all numbers are equal then answer will be n * (n - 1) / 2,
-otherwise the answer will be cnt1 * cnt2, 
-where cnt1 is the number of our maximum elements and 
-cnt2 is the number of our minimum elements.
+find max in every window
+window : positves ki window and negatives ki window
+*/
+
+/*
+thoda kam sense => bad code
+while(i < n && j < n) {
+        if(v[i] < 0) {
+            int max_neg = v[i];
+            while(v[j] < 0) {
+                if(max_neg < v[j]) {
+                    max_neg = v[j];
+                }
+                j++;
+            }
+            i = j;
+            sum += max_neg;
+        } else if(v[i] > 0) {
+            int max_pos = v[i];
+            while(v[i] > 0) {
+                if(max_pos < v[i]) {
+                    max_pos = v[i];
+                }
+                i++;
+            }
+            j = i;
+            sum += max_pos;
+        }
+    }
 */
