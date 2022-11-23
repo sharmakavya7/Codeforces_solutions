@@ -43,44 +43,50 @@ void printv(int v[], int n) { for(int i=0; i<n; i++) { cout << v[i] <<" "; } lin
 
 const int N = 2e5+10;
 
-ll n, k, l, p, q, m, d, a, b, x;
+ll n, k, l, p, q, m, d, x;
 string s, t;
-vector<ll>v, v1, v2;
-// int v[N], v1[N], v2[N];
+// vector<ll>v, v1, v2;
+int v[N], v1[N], v2[N], a[N], b[N];
+
+bool isSorted(int a[], int n) {
+    
+    if (n == 0 || n == 1)
+        return true;
+ 
+    for (int i = 1; i < n; i++)
+        if (a[i - 1] > a[i])
+            return false;
+ 
+    return true;
+}
 
 void solve() {
     cin >> n;
     for(int i=0; i<n; i++) {
-        ll t;
-        cin >> t;
-        v.push_back(t);
+        cin >> a[i];
     }
-    // for(auto i:v){
-    //     cout << i<<" ";
-    // }
-    vector<ll>ans;
-    sort(v.begin(), v.end());
-    for(ll i=0, j=n-1; i<=j; i++, j--) {
-        ans.push_back(v[j]);
-        ans.push_back(v[i]);
-        if(i == j) {
-            ans.pop_back();
+    int cnt1 = 0, cnt0 = 0;
+    for(int i=0; i<n; i++) {
+        cin >> b[i];
+        if(b[i] == 1) {
+            cnt1++;
+        } else{
+            cnt0++;
         }
     }
-    reverse(all(ans));
-    for(auto i: ans) {
-        cout << i <<" ";
+    if(cnt1 && cnt0) {
+        cout << "Yes"; line;
+        return;
+    } 
+    else if(cnt1 == 0 || cnt0 == 0) {
+        if(isSorted(a, n)) {
+            cout << "Yes"; line;
+            return;
+        } else {
+            cout <<"No"; line;
+            return;
+        }
     }
-    line;
-}
-
-void clear_global() {
-    v.clear();
-    // cnt = -1;
-    // mp.clear();
-    // fill_n(v, n, 0);
-    // fill_n(v1, n, 0);
-    // fill_n(v2, n, 0);
 }
 
 int main() {
@@ -89,7 +95,7 @@ int main() {
     cin >> t;
     while(t--) {
         solve();
-        clear_global();
+        // clear_global();
     }
     // solve();
     return 0;
