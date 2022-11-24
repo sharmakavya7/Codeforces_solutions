@@ -21,6 +21,7 @@
         "xutility": "cpp",
         "cmath": "cpp",
         "ios": "cpp",
-        "numeric": "cpp"
+        "numeric": "cpp",
+        "type_traits": "cpp"
     }
 }
