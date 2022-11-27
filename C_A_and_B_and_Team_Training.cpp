@@ -50,51 +50,33 @@ const int N = 2e5+10;
 ll n, k, l, p, q, m, d, x, y, r;
 string s, t;
 // vector<pll>v;
-ll a[N];
+// ll a[N];
 
 void solve() {
-    cin >> n;
-    ll sum = 0;
-    vector<int> b(n + 2);
-    for(int i=0; i<n+2; i++) {
-        cin>>b[i];
-        sum += b[i];
-    }
-    // sort(b.begin(), b.end(), greater<ll>());
-    sort(b.rbegin(), b.rend());
-    // simple
-    if(b[1] == sum - b[0] - b[1]) {
-        for(int i=2; i<b.size(); i++) {
-            cout << b[i] <<" ";
+    ll a, b;
+    cin >> a >> b;
+    ll ans = 0;
+    while( a && b && a + b >= 3) {
+        ans++;
+        if(a < b) {
+            a --;
+            b -= 2;
+        } else {
+            b--;
+            a -= 2;
         }
-        line;
     }
-    else {
-        // find that number by linearly iterating
-        for(int i=1; i<b.size(); i++) {
-            if(b[0] == sum - b[i] - b[0]) {
-                for(int j = 1; j < i; j++) {
-                    cout << b[j] <<" ";
-                }
-                for(int j=i+1; j<b.size(); j++) {
-                    cout << b[j]<<" ";
-                }
-                line;
-                return;
-            }
-        }
-        cout << "-1"; line;
-    }
+    cout << ans; line;
 }
 
 int main() {
     fast;
-    ll t;
-    cin >> t;
-    while(t--) {
-        solve();
-        // clear_global();
-    }
-    // solve();
+    // ll t;
+    // cin >> t;
+    // while(t--) {
+    //     solve();
+    //     // clear_global();
+    // }
+    solve();
     return 0;
 }

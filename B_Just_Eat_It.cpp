@@ -55,36 +55,29 @@ ll a[N];
 void solve() {
     cin >> n;
     ll sum = 0;
-    vector<int> b(n + 2);
-    for(int i=0; i<n+2; i++) {
-        cin>>b[i];
-        sum += b[i];
+    // TWO cases: 1. if prifix or suff -ve hai, then return, NO bcz why not! (Obvio)
+    // 2. else all the segments that she chooses will always give me sum lesser than total arr sum
+    // return YES
+    // but but, (doubt) what about this TC: arr = {4, -1, 2, -1, -2, 6, 3} => ye to NO dena chaiye
+    for(int i=0; i<n; i++) {
+        cin >> a[i];
     }
-    // sort(b.begin(), b.end(), greater<ll>());
-    sort(b.rbegin(), b.rend());
-    // simple
-    if(b[1] == sum - b[0] - b[1]) {
-        for(int i=2; i<b.size(); i++) {
-            cout << b[i] <<" ";
+    for(int i=0; i<n; i++) {
+        sum += a[i];
+        if(sum <= 0) {
+            cout<<"NO"; line;
+            return;
         }
-        line;
     }
-    else {
-        // find that number by linearly iterating
-        for(int i=1; i<b.size(); i++) {
-            if(b[0] == sum - b[i] - b[0]) {
-                for(int j = 1; j < i; j++) {
-                    cout << b[j] <<" ";
-                }
-                for(int j=i+1; j<b.size(); j++) {
-                    cout << b[j]<<" ";
-                }
-                line;
-                return;
-            }
+    sum = 0;
+    for(int i=n-1; i>=0; i--) {
+        sum += a[i];
+        if(sum <= 0) {
+            cout <<"NO"; line;
+            return;
         }
-        cout << "-1"; line;
     }
+    cout <<"YES"; line;
 }
 
 int main() {
