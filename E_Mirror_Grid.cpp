@@ -41,33 +41,34 @@ using namespace std;
 const int mod = (int)1e9+7;
 const int N = 3e5+10;
 
-ll n, k, l, p, q, m, d, x, y;
-// string s, t;
+int n, k, l, p, q, m, d, x, y;
+string s, t;
 // vector<pll>v;
-ll a[N], b[N];
+// int a[N], b[N], Y[N];
 
 void solve() {
     cin >> n;
+    vector<vector<int>>v(n,vector<int>(n));
     for(int i=0; i<n; i++) {
-        cin >> a[i];
-    }
-    for(int i=0; i<n; i++) {
-        int r;
-        cin>>r;
-        a[i] -= r;
-    }
-    sort(a, a+n);
-    int l = 0, r = n-1, ans = 0;
-    while(l < r) {
-        if(a[l] + a[r] <= 0) {
-            ans++;
-            l++, r--;
-        } else {
-            r--;
+        for(int j=0; j<n; j++){
+            char c;
+            cin >> c;
+            // v[i].push_back(c - '0');
+            v[i][j] = c - '0';
         }
     }
-    cout<<ans; line;
+    int ans = 0;
+    for (int i=0; i<n;i++) {
+        for(int j =0; j<n; j++) {
+            ll sum = v[i][j] + v[j][n-1-i] + v[n-1-i][n-1-j] + v[n-1-j][i];
+            // cout<<sum<<" ";
+            ans += min(sum, 4 - sum);
+        }
+    }
+    cout << ans/4; line;
 }
+
+// https://youtu.be/76jBjNdfpUM
 
 int main() {
     fast;
@@ -80,3 +81,4 @@ int main() {
     // solve();
     return 0;
 }
+

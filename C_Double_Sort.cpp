@@ -41,32 +41,52 @@ using namespace std;
 const int mod = (int)1e9+7;
 const int N = 3e5+10;
 
-ll n, k, l, p, q, m, d, x, y;
-// string s, t;
+int n, k, l, p, q, m, d, x, y;
+string s, t;
 // vector<pll>v;
-ll a[N], b[N];
+int a[N], b[N], M[N];
+vector<pair<int,int>> ans;
+
+void bubbleSort(int a[], int b[], int n) {
+    int i, j;
+    for (i = 0; i < n ; i++) {
+        for (j = 0; j < n ; j++) {
+            if (a[j] > a[j + 1] || b[j] > b[j + 1]) {
+                swap(a[j], a[j + 1]);
+                swap(b[j], b[j + 1]);
+                ans.push_back(make_pair(j, j+1));
+                // cout << j << " " << j + 1; line;
+            }
+        }
+    }
+}
 
 void solve() {
     cin >> n;
-    for(int i=0; i<n; i++) {
+    ans.clear();
+    for(int i=1; i<=n; i++) {
         cin >> a[i];
     }
-    for(int i=0; i<n; i++) {
-        int r;
-        cin>>r;
-        a[i] -= r;
+    for(int i=1; i<=n; i++) {
+        cin >> b[i];
     }
-    sort(a, a+n);
-    int l = 0, r = n-1, ans = 0;
-    while(l < r) {
-        if(a[l] + a[r] <= 0) {
-            ans++;
-            l++, r--;
-        } else {
-            r--;
+    bubbleSort(a, b, n);
+    bool flag = 0;
+    for(int i=1; i<n; i++) {
+        if(b[i] > b[i+1] || a[i] > a[i+1]) {
+            // cout <<"-1"; line;
+            flag = 1;
         }
     }
-    cout<<ans; line;
+    if(flag == 1) {
+        cout << "-1"; line;
+        // return;
+    } else {
+        cout << ans.size(); line;
+        for(auto i : ans) {
+            cout << i.first <<" "<<i.second; line;
+        }
+    }
 }
 
 int main() {
@@ -80,3 +100,7 @@ int main() {
     // solve();
     return 0;
 }
+
+
+
+

@@ -41,32 +41,47 @@ using namespace std;
 const int mod = (int)1e9+7;
 const int N = 3e5+10;
 
-ll n, k, l, p, q, m, d, x, y;
-// string s, t;
+int n, k, l, p, q, m, d, x, y;
+string s, t;
 // vector<pll>v;
-ll a[N], b[N];
+int a[N], b[N], Y[N];
 
 void solve() {
-    cin >> n;
+    cin >> n >> k;
+    map<int,int> mp;
     for(int i=0; i<n; i++) {
-        cin >> a[i];
+        int x;
+        cin >> x;
+        mp[x]++;
     }
-    for(int i=0; i<n; i++) {
-        int r;
-        cin>>r;
-        a[i] -= r;
+    vector<int> v1,v2;
+    for(auto it:mp) {
+        v1.push_back(it.first);
+        v2.push_back(it.second);
     }
-    sort(a, a+n);
-    int l = 0, r = n-1, ans = 0;
-    while(l < r) {
-        if(a[l] + a[r] <= 0) {
-            ans++;
-            l++, r--;
-        } else {
-            r--;
+    int m = v1.size();
+    int l = 0, r = 0, len = 0;
+    for(int i = 0, j = 0; i<m && j<m; i++) {
+        if(v2[i] < k) {
+            continue;
         }
+        j = i+1;
+        // wimdow
+        while(j < m && v1[j] - v1[j-1] == 1 && v2[j] >= k) {
+            j++;
+        }
+        if(j-i > len) {
+            len = j-i;
+            l = v1[i];
+            r = v1[j-1];
+        }
+        i = j-1;
     }
-    cout<<ans; line;
+    if(len == 0) {
+        cout<<-1; line;
+    } else {
+        cout << l << " " << r; line;
+    }    
 }
 
 int main() {
@@ -80,3 +95,4 @@ int main() {
     // solve();
     return 0;
 }
+

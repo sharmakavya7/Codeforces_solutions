@@ -41,32 +41,29 @@ using namespace std;
 const int mod = (int)1e9+7;
 const int N = 3e5+10;
 
-ll n, k, l, p, q, m, d, x, y;
-// string s, t;
+// int n, k, l, p, q, m, d, x, y;
+string s, t;
 // vector<pll>v;
-ll a[N], b[N];
+// int a[N], b[N], M[N];
 
 void solve() {
+    ll n;
     cin >> n;
-    for(int i=0; i<n; i++) {
-        cin >> a[i];
+    vector<ll>v;
+    for(int i=0; i<n; i++){
+        int p;
+        cin >>p;
+        v.push_back(p);
     }
-    for(int i=0; i<n; i++) {
-        int r;
-        cin>>r;
-        a[i] -= r;
-    }
-    sort(a, a+n);
-    int l = 0, r = n-1, ans = 0;
-    while(l < r) {
-        if(a[l] + a[r] <= 0) {
-            ans++;
-            l++, r--;
-        } else {
-            r--;
+    ll ans = 0;
+    for(int i=0; i<n; i++){
+        for(int j = i+1; j<n; j++) {
+            if(v[i] >= v[j]) {
+                ans++;
+            }
         }
     }
-    cout<<ans; line;
+    cout <<ans; line;
 }
 
 int main() {

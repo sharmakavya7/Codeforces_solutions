@@ -41,33 +41,51 @@ using namespace std;
 const int mod = (int)1e9+7;
 const int N = 3e5+10;
 
-ll n, k, l, p, q, m, d, x, y;
-// string s, t;
+// int n, k, l, p, q, m, d, x, y;
+string s, b;
 // vector<pll>v;
-ll a[N], b[N];
+// int a[N], b[N], M[N];
 
 void solve() {
-    cin >> n;
+    int n;
+    cin >> n >> s;
+    // no of dis char & max freq & ans
+    int ans = 0, maxfreq = 0, dis = 0;
+    // freq array
+    int c[10];
+    // i -> starting point of substr
     for(int i=0; i<n; i++) {
-        cin >> a[i];
-    }
-    for(int i=0; i<n; i++) {
-        int r;
-        cin>>r;
-        a[i] -= r;
-    }
-    sort(a, a+n);
-    int l = 0, r = n-1, ans = 0;
-    while(l < r) {
-        if(a[l] + a[r] <= 0) {
-            ans++;
-            l++, r--;
-        } else {
-            r--;
+        
+        dis = 0, maxfreq=0;
+        for(int k=0; k<=9; k++) {
+            c[k] = 0;
+        }
+        // ending point of substr
+        for(int j=i; j <= i+99 && j < n; j++) {
+            c[s[j]-'0']++;
+            maxfreq = max(maxfreq, c[s[j]-'0']);
+            // first occ of this char, i.e. dis char
+            if(c[s[j]-'0'] == 1) {
+                dis++;
+            }
+            if(maxfreq <= dis) {
+                ans++;
+            }
         }
     }
-    cout<<ans; line;
+    cout << ans; line;
 }
+
+/*
+0 - 9 digits in string s
+Loophole: 0 is 10 times, 1 is 10 times, 2 is 10 times ------- 9 is 10 times
+=> 100 digits and high occ freq = 10 nad no of dis char = 10
+=> conditons (till here hols true): 10 <= 10
+But but, when we include an 11th character, this condn will become false as we dont have digits>=9
+Steps: 
+1. Check all the substr whose len <= 100, TC: n(100)
+2. 
+*/
 
 int main() {
     fast;

@@ -41,32 +41,46 @@ using namespace std;
 const int mod = (int)1e9+7;
 const int N = 3e5+10;
 
-ll n, k, l, p, q, m, d, x, y;
-// string s, t;
+int n, k, l, p, q, m, d, x, y;
+string s, t;
 // vector<pll>v;
-ll a[N], b[N];
+int a[N], b[N], Y[N];
+
+/// hardddd
 
 void solve() {
-    cin >> n;
-    for(int i=0; i<n; i++) {
+    int n, m, z, y;
+    cin >> n >> m;
+    //int tot = 0;
+    for(int i=0; i<m; i++){
         cin >> a[i];
     }
-    for(int i=0; i<n; i++) {
-        int r;
-        cin>>r;
-        a[i] -= r;
+    vector<int> v;
+    sort(a, a + m);
+    for(int i=0; i<m; i++) {
+        if(i < m-1)
+            z = abs(a[i+1] - a[i]);
+        else {
+            z = n - a[m-1] + a[0];
+        }
+        v.push_back(z-1);
     }
-    sort(a, a+n);
-    int l = 0, r = n-1, ans = 0;
-    while(l < r) {
-        if(a[l] + a[r] <= 0) {
-            ans++;
-            l++, r--;
+    sort(v.begin(), v.end(), greater<int>());
+    int cnt = 0, i=1, j=0;
+    for( ; i<=2*m && j<=m; i++) {
+        if(v[j] <= 2*i-2) {
+            break;
+        }
+        if(i % 2) {
+            cnt++; 
         } else {
-            r--;
+            //cout<<" v[j]: "<<v[j]<<"  ";
+            cnt += v[j] - 2*i+2;
+            j++;
         }
     }
-    cout<<ans; line;
+
+    cout<< n - cnt ; line;
 }
 
 int main() {
@@ -80,3 +94,4 @@ int main() {
     // solve();
     return 0;
 }
+

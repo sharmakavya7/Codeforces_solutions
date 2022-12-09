@@ -41,32 +41,54 @@ using namespace std;
 const int mod = (int)1e9+7;
 const int N = 3e5+10;
 
-ll n, k, l, p, q, m, d, x, y;
-// string s, t;
+// int n, k, l, p, q, m, d, x, y;
+string s, t;
 // vector<pll>v;
-ll a[N], b[N];
+// int a[N], b[N], M[N];
+// vector<pair<int,int>> ans;
 
 void solve() {
-    cin >> n;
+    ll n, x, y;
+    cin >> n >> x >> y;
+    string s, t;
+    cin >> s >> t;
+    ll corr = 0;
+    vector<ll>temp;
     for(int i=0; i<n; i++) {
-        cin >> a[i];
-    }
-    for(int i=0; i<n; i++) {
-        int r;
-        cin>>r;
-        a[i] -= r;
-    }
-    sort(a, a+n);
-    int l = 0, r = n-1, ans = 0;
-    while(l < r) {
-        if(a[l] + a[r] <= 0) {
-            ans++;
-            l++, r--;
-        } else {
-            r--;
+        if(s[i] != t[i]) {
+            corr++;
+            temp.push_back(i);
         }
     }
-    cout<<ans; line;
+    if(corr % 2 != 0) {
+        cout << "-1"; line;
+        return;
+    }
+    // x wale
+    ll ans1 = 0;
+    for(int i=0; i<s.size()-1; i++) {
+        if(s[i] != t[i]) {
+            ans1 += x;
+            // cout <<"ans1:"<<ans1<<" ";
+            s[i] = 1-s[i];
+            s[i+1] = 1-s[i+1];
+        }
+    }
+    ll ans2 = 0;
+    if(corr != 2) {
+        ans2 = y*(corr/2);
+    } else {
+        // tricky
+        if(temp[1] - temp[0] == 1) {
+            if(n>2) 
+                x = min(x,2*y);
+            ans2 =x;
+        }
+        else
+            ans2 = y;
+    }
+    // cout <<"ans2:"<<ans2<<" ";
+    cout << min(ans1, ans2); line;
 }
 
 int main() {
@@ -80,3 +102,10 @@ int main() {
     // solve();
     return 0;
 }
+
+/*
+Odd corrections: -1
+Rest: 2 pointer types, keep on adding x in ans1 and change adj digits by 1-a[i], 1-b[i]
+At the end, find the ans of y too, ans2 = y*number_of_corrections/2
+Return min (ans1, ans2)
+*/

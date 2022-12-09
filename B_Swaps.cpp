@@ -42,31 +42,38 @@ const int mod = (int)1e9+7;
 const int N = 3e5+10;
 
 ll n, k, l, p, q, m, d, x, y;
-// string s, t;
+string s, t;
 // vector<pll>v;
-ll a[N], b[N];
+ll a[N], b[N], Y[N];
 
 void solve() {
     cin >> n;
     for(int i=0; i<n; i++) {
         cin >> a[i];
     }
+    ll maxi = 0;
     for(int i=0; i<n; i++) {
-        int r;
-        cin>>r;
-        a[i] -= r;
+        cin >> b[i];
+        maxi = max(maxi, b[i]);
+        if(b[i] < maxi) {
+            b[i] = maxi;
+        } 
     }
-    sort(a, a+n);
-    int l = 0, r = n-1, ans = 0;
-    while(l < r) {
-        if(a[l] + a[r] <= 0) {
-            ans++;
-            l++, r--;
-        } else {
-            r--;
-        }
+    int moves = 0;
+    // if(b[0] > a[0]) {
+    //     cout <<"0"; line;
+    //     return;
+    // }
+    // int dhundo = b[0];
+    // auto lb = lower_bound(a, a+n, dhundo) - a;
+    // cout << lb <<" b[0]:" <<dhundo <<" ";
+    // cout << lb; line;
+    ll mini = INT_MAX;
+    for(ll i = 0; i < n; i++) {
+        ll lb = lower_bound(b, b + n, a[i]) - b;
+        mini = min(mini, lb + i);
     }
-    cout<<ans; line;
+    cout << mini; line;
 }
 
 int main() {
