@@ -45,28 +45,9 @@ const int N = 2e5+10;
 // string s, b;
 // vector<pll>v;
 
-// Make all elements of an Array equal by adding and subtracting 1 in single operation
-void solve() {
-    ll n, a[N];
-    cin >> n;
-    if(n == 1) {
-        cout << "Yes"; line;
-        return;
-    }
-    for(int i = 0; i<n; i++) {
-        cin >> a[i];
-    }
-    ll sum = accumulate(a, a+n, 0LL);
-    if(sum % n == 0) {
-        cout <<"Yes"; line;
-    } else {
-        cout <<"No"; line;
-    }
-    // cout << sum; line;
-}
 
-/*
-int n, i, j, k, ans, f, high, low;;
+void solve() {
+    int n, i, j, k, ans, f, high, low;;
     cin>>n;
         
     ll a[n], c[n+1];
@@ -101,6 +82,26 @@ int n, i, j, k, ans, f, high, low;;
     }
 
     cout<<ans; line
+}
+
+/*
+// Make all elements of an Array equal by adding and subtracting 1 in single operation
+    ll n, a[N];
+    cin >> n;
+    if(n == 1) {
+        cout << "Yes"; line;
+        return;
+    }
+    for(int i = 0; i<n; i++) {
+        cin >> a[i];
+    }
+    ll sum = accumulate(a, a+n, 0LL);
+    if(sum % n == 0) {
+        cout <<"Yes"; line;
+    } else {
+        cout <<"No"; line;
+    }
+    // cout << sum; line;
 */
 
 int main() {
