@@ -22,6 +22,7 @@
         "cmath": "cpp",
         "ios": "cpp",
         "numeric": "cpp",
-        "type_traits": "cpp"
+        "type_traits": "cpp",
+        "map": "cpp"
     }
 }
