@@ -55,40 +55,22 @@ const int N = 2e5+10;
 // int a[N], degree[N];
 
 void solve() {
-    ll n;
-    cin >> n;
-    if(n == 1) {
-        cout << 1; line;
-        cout << 1 << " " << 2; line;
-        return;
-    } 
-    else {
-        cout << (n+1) / 2 ; line;
-        int low = 1, high = 3*n;
-        while(low < high) {
-            cout << low <<" " << high; line;
-            low += 3;
-            high -= 3;
+    // int n = 8; 
+    string s;
+    int flag = 0;
+    for(int i=0; i<8; i++){
+        cin >> s;
+        if(s=="RRRRRRRR"){
+            flag = 1;
         }
     }
-    // string s;
-    // cin >> s;
-    // for(int i=0; i<n; i++) {
-    //     s += "BAN";
-    // }
-    // vector<pair<int,int>>v;
-    // for(int i=0; i<3*n; i++) {
-    //     if(s[i] == 'B') {
-    //         swap(s[i], s[i+1]);
-    //         v.push_back({i+1, i+2});
-    //         // cout << i+1 <<" "<<i+2; line;
-    //         i++;
-    //     }
-    // }
-    // cout << v.size(); line;
-    // for(int i=0; i<v.size(); i++) {
-    //     cout << v[i].first << " " << v[i].second; line;
-    // }
+    if(flag == 1) {
+        cout<<"R"; line;
+    }
+    else {
+        cout<<"B"; line;
+    }
+    
 }
 
 int main() {
