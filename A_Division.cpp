@@ -43,7 +43,7 @@ using namespace std;
 ll __gcd(ll a,ll b) { if(a!=0)return __gcd(b%a,a); return b; }
 bool comp(const pair<int,int> &a, const pair<int,int> &b) { return (a.second < b.second); }
 void print(vector<int> vec){ for(int i=0; i<vec.size(); i++) {cout << vec[i]<<" ";} cout<<endl;}
-void printv(int v[], int n) { for(int i=0; i<n; i++) { cout << v[i] <<" "; } line;}
+void printv(ll v[], ll n) { for(int i=0; i<n; i++) { cout << v[i] <<" "; } line;}
 
 const int mod = (int)1e9+7;
 const int N = 2e5+10;
@@ -52,27 +52,51 @@ const int N = 2e5+10;
 // string s, b;
 // vector<pll>v;
 // ll a[N][N];
+// int a[N], degree[N];
 
 void solve() {
-    ll n;
-    string s;
-    cin >> n >> s;
-    
-    unordered_map<string, int>mp;
-    bool flag = 0;
-    for(int i=0; i<n-1; i++) {
-        string temp = s.substr(i,2);
-        if(mp.count(temp)) {
-            flag = 1;
-            break;
+    int n;
+    cin >> n;
+    vector<int>a, b(n);
+    map<int, int>mp;
+    for(int i=0; i<n; i++) {
+        cin >> b[i];
+    }
+    for(int i=0; i<n; i++) {
+        mp[b[i]]++;
+    }
+    for(auto i=0; i<n; i++) {
+        if(mp[b[i]] % b[i] != 0) {
+            cout <<"-1"; line;
+            return;
         }
-        if(i == 0) continue;
-        mp[s.substr(i-1,2)]++;
     }
-    if(flag) {
-        cout << "YES";
+    map<int,int>mp2, mp3;
+    // line se numbers
+    int j = 1;
+    a.push_back(j);
+    mp2[b[0]] = j++;
+    mp3[b[0]]++;
+
+    for(int i=1; i<n; i++) {
+        if(mp2.find(b[i]) == mp2.end()) {
+            a.push_back(j);
+            mp2[b[i]] = j++;
+            mp3[b[i]]++;
+        } 
+        else if( mp3[b[i]] % b[i] != 0) {
+            a.push_back(mp2[b[i]]);
+            mp3[b[i]]++;
+            // a.push_back(mp3[b[i]]);
+        }
+        // case: 2 occurs 4 times or 2 occurs 6 times
+        else {
+            mp2[b[i]] = j;
+            a.push_back(j++);
+            mp3[b[i]]++;
+        } 
     }
-    else cout << "NO"; line;
+    print(a);
 }
 
 int main() {
@@ -86,3 +110,21 @@ int main() {
     // solve();
     return 0;
 }
+/*
+if(count(mp2.begin(), mp2.end(), b[i]) == 0) {
+            a.push_back(j);
+            mp2[b[i]] = j++;
+            mp3[b[i]]++;
+        } 
+for(auto i : mp) {
+        if(i.first == i.second) {
+            // mp2[i.first] = j++;
+            a.push_back(j++);
+        } else {
+            if(i.second % i.first != 0) {
+                int tim = i.second / i.first;
+            }
+            
+        }
+    } 
+*/

@@ -24,6 +24,7 @@
         "numeric": "cpp",
         "type_traits": "cpp",
         "map": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "iterator": "cpp"
     }
 }

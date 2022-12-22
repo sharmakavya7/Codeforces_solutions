@@ -43,7 +43,7 @@ using namespace std;
 ll __gcd(ll a,ll b) { if(a!=0)return __gcd(b%a,a); return b; }
 bool comp(const pair<int,int> &a, const pair<int,int> &b) { return (a.second < b.second); }
 void print(vector<int> vec){ for(int i=0; i<vec.size(); i++) {cout << vec[i]<<" ";} cout<<endl;}
-void printv(int v[], int n) { for(int i=0; i<n; i++) { cout << v[i] <<" "; } line;}
+void printv(ll v[], ll n) { for(int i=0; i<n; i++) { cout << v[i] <<" "; } line;}
 
 const int mod = (int)1e9+7;
 const int N = 2e5+10;
@@ -52,27 +52,45 @@ const int N = 2e5+10;
 // string s, b;
 // vector<pll>v;
 // ll a[N][N];
+// int a[N], degree[N];
 
 void solve() {
-    ll n;
+    int n;
+    cin >> n;
     string s;
-    cin >> n >> s;
-    
-    unordered_map<string, int>mp;
+    cin >> s;
+    if(n == 1 && s != "W") {
+        cout << "NO"; line; 
+        return;
+    }
+    int i = 0;
+    int cntR = 0, cntB = 0;
     bool flag = 0;
-    for(int i=0; i<n-1; i++) {
-        string temp = s.substr(i,2);
-        if(mp.count(temp)) {
+    for(int i=0; i<n; i++) {
+    // while(i < n) {
+        if(s[i] == 'R') {
+            cntR++;
             flag = 1;
-            break;
         }
-        if(i == 0) continue;
-        mp[s.substr(i-1,2)]++;
+        if(s[i] == 'B') {
+            cntB++;
+            flag = 1;
+        }
+        if(s[i] == 'W') {
+            if(( cntB == 0 || cntR == 0) && flag) {
+                cout << "NO"; line;
+                return;
+            }
+            cntR = 0, cntB = 0;
+            flag = 0;
+        }
+        // i++;
     }
-    if(flag) {
-        cout << "YES";
+    if(( cntB == 0 || cntR == 0 ) && flag) {
+        cout << "NO"; line;
+        return;
     }
-    else cout << "NO"; line;
+    cout << "YES"; line;
 }
 
 int main() {
@@ -86,3 +104,4 @@ int main() {
     // solve();
     return 0;
 }
+

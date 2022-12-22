@@ -43,7 +43,7 @@ using namespace std;
 ll __gcd(ll a,ll b) { if(a!=0)return __gcd(b%a,a); return b; }
 bool comp(const pair<int,int> &a, const pair<int,int> &b) { return (a.second < b.second); }
 void print(vector<int> vec){ for(int i=0; i<vec.size(); i++) {cout << vec[i]<<" ";} cout<<endl;}
-void printv(int v[], int n) { for(int i=0; i<n; i++) { cout << v[i] <<" "; } line;}
+void printv(ll v[], ll n) { for(int i=0; i<n; i++) { cout << v[i] <<" "; } line;}
 
 const int mod = (int)1e9+7;
 const int N = 2e5+10;
@@ -52,27 +52,29 @@ const int N = 2e5+10;
 // string s, b;
 // vector<pll>v;
 // ll a[N][N];
+// int a[N], degree[N];
 
 void solve() {
-    ll n;
-    string s;
-    cin >> n >> s;
+    int n;
+    cin >> n;
+    int a[n], b[n];
     
-    unordered_map<string, int>mp;
-    bool flag = 0;
-    for(int i=0; i<n-1; i++) {
-        string temp = s.substr(i,2);
-        if(mp.count(temp)) {
-            flag = 1;
-            break;
+    for(int i=0; i<n; i++) {
+        cin >> a[i];
+    }
+
+    bool flag1 = 0;
+
+    for(int i=2;i<n;i++){
+        if(a[i]%2 != a[i-2]%2){
+            flag1 = 1;
         }
-        if(i == 0) continue;
-        mp[s.substr(i-1,2)]++;
     }
-    if(flag) {
-        cout << "YES";
+    if(flag1) {
+        cout << "NO" ; line;
+    } else {
+        cout <<"YES"; line;
     }
-    else cout << "NO"; line;
 }
 
 int main() {
@@ -86,3 +88,47 @@ int main() {
     // solve();
     return 0;
 }
+
+/*
+bool fl1=0, fl2 = 0;
+    int a1 = a[0], a2 = a[1];
+    if(a1 % 2 == 0) {
+        fl1 = 1;
+    }
+    if(a2 % 2 == 0) {
+        fl2 = 1;
+    }
+    for(int i=0; i<n; i ++) {
+        if(i % 2 == 0) {
+            
+        } else if(i % 2 != 0) {
+
+        }
+    }
+
+    for(int i=0; i<n; i++) {
+        if(i%2 == 0) {
+            cin >> a[i];
+        }
+        else {
+            cin >> b[i];
+        }
+    }
+    if(a[0] % 2 == 0 || b[0] % 2 == 0) {
+        for(int i=0; i<n/2; i++) {
+            if(a[i] % 2 != 0 || b[i] % 2 != 0) {
+                cout << "NO"; line;
+                return;
+            }
+        }
+    }
+    if(a[0] % 2 != 0 || b[0] % 2 != 0) {
+        for(int i=0; i<n/2; i++) {
+            if(a[i] % 2 == 0 || b[i] == 0) {
+                cout << "NO"; line;
+                return;
+            }
+        }
+    }
+    cout <<"YES"; line;
+*/

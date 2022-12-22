@@ -43,7 +43,7 @@ using namespace std;
 ll __gcd(ll a,ll b) { if(a!=0)return __gcd(b%a,a); return b; }
 bool comp(const pair<int,int> &a, const pair<int,int> &b) { return (a.second < b.second); }
 void print(vector<int> vec){ for(int i=0; i<vec.size(); i++) {cout << vec[i]<<" ";} cout<<endl;}
-void printv(int v[], int n) { for(int i=0; i<n; i++) { cout << v[i] <<" "; } line;}
+void printv(ll v[], ll n) { for(int i=0; i<n; i++) { cout << v[i] <<" "; } line;}
 
 const int mod = (int)1e9+7;
 const int N = 2e5+10;
@@ -52,28 +52,42 @@ const int N = 2e5+10;
 // string s, b;
 // vector<pll>v;
 // ll a[N][N];
+// int a[N], degree[N];
 
 void solve() {
     ll n;
-    string s;
-    cin >> n >> s;
-    
-    unordered_map<string, int>mp;
-    bool flag = 0;
-    for(int i=0; i<n-1; i++) {
-        string temp = s.substr(i,2);
-        if(mp.count(temp)) {
-            flag = 1;
-            break;
-        }
-        if(i == 0) continue;
-        mp[s.substr(i-1,2)]++;
+    cin >> n;
+    ll a[n];
+    for(int i=0; i<n; i++) {
+        cin >> a[i];
     }
-    if(flag) {
-        cout << "YES";
+    sort(a, a+n);
+    if (a[0] == a[n-1]) {
+        cout << 1ll * n * (n - 1); line
+        return;
     }
-    else cout << "NO"; line;
+    int diff = a[n-1] - a[0];
+
+    int i = 0, j = n-1;
+    int cntl = 0, cntr = 0;
+    // while(a[0] == a[i] && i < n) {
+    for(int i=0; i<n; i++) {
+        if(a[0] == a[i])
+            cntl++;
+    }
+    // while(a[n-1] == a[j] && j >= 0) {
+    for(int j=n-1; j>=0; j--) {
+        if(a[n-1] == a[j])
+            cntr++;
+    }
+    // jitne bhi same no honge, unke pair ka cnt return krna hai basically
+    // 1 1 1 1 2 2 2, total pairs: no of 1s * no of 2s * 2 krdo cz if 1,2 cnsider kra hai then 2,1 
+    // int cntStart = i;
+    // int cntEnd = n - j - 1;
+
+    cout << 1LL * cntl * cntr * 2; line;
 }
+
 
 int main() {
     fast;

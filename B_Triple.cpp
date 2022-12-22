@@ -43,7 +43,7 @@ using namespace std;
 ll __gcd(ll a,ll b) { if(a!=0)return __gcd(b%a,a); return b; }
 bool comp(const pair<int,int> &a, const pair<int,int> &b) { return (a.second < b.second); }
 void print(vector<int> vec){ for(int i=0; i<vec.size(); i++) {cout << vec[i]<<" ";} cout<<endl;}
-void printv(int v[], int n) { for(int i=0; i<n; i++) { cout << v[i] <<" "; } line;}
+void printv(ll v[], ll n) { for(int i=0; i<n; i++) { cout << v[i] <<" "; } line;}
 
 const int mod = (int)1e9+7;
 const int N = 2e5+10;
@@ -52,28 +52,27 @@ const int N = 2e5+10;
 // string s, b;
 // vector<pll>v;
 // ll a[N][N];
+// int a[N], degree[N];
 
 void solve() {
-    ll n;
-    string s;
-    cin >> n >> s;
-    
-    unordered_map<string, int>mp;
-    bool flag = 0;
-    for(int i=0; i<n-1; i++) {
-        string temp = s.substr(i,2);
-        if(mp.count(temp)) {
-            flag = 1;
-            break;
+    int n;
+    cin >> n;
+    int a[n];
+    unordered_map<int, int>mp;
+    for(int i=0; i<n; i++) {
+        int p;
+        cin >> p;
+        mp[p]++;
+    }
+    for(auto i : mp) {
+        if(i.second >= 3) {
+            cout << i.first; line;
+            return;
         }
-        if(i == 0) continue;
-        mp[s.substr(i-1,2)]++;
     }
-    if(flag) {
-        cout << "YES";
-    }
-    else cout << "NO"; line;
+    cout << "-1"; line;
 }
+
 
 int main() {
     fast;
@@ -86,3 +85,5 @@ int main() {
     // solve();
     return 0;
 }
+
+

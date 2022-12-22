@@ -57,6 +57,21 @@ const int N = 2e5+10;
 void solve() {
     ll n;
     cin >> n;
+    cout << n; line;
+    for(int i=0; i<n; i++) {
+        ll r;
+        cin >> r;
+        int mn = 1;
+        while(mn <= r) {
+            mn *= 2;
+        }
+        cout << i+1 <<" "<<mn - r; line;
+    }
+    // line;
+}
+/*
+ll n;
+    cin >> n;
     vector<pll>a, ans;
     for(int i=1; i<=n; i++) {   
         // cin >> a[i];
@@ -77,8 +92,6 @@ void solve() {
     for(auto i : ans) {
         cout << i.first <<" "<<i.second; line;
     }
-}
-/*
 *****
 lets say we have 5, 13
 [(13/5) + 1 ] * 5  = 15
