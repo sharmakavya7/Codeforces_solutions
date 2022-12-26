@@ -67,10 +67,13 @@ void solve() {
     }
     if (x == y) 
         z = min(z, cnt);
+        
     if (n - x + 1 == y) 
         z = min(z, n-cnt);
+
     if (z == n+1) 
         z =- 1;
+    
     cout << z; line;
 }
 

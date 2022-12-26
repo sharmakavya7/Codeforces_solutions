@@ -85,7 +85,7 @@ int main() {
     ll cnt = 0;
     for(int i=1; i<=n; i++) {
         if(!vis[i]) {
-            if(dfs(i, -1) == false) {
+            if(!dfs(i, -1)) {
                 cnt++;
             }
         }
