@@ -45,43 +45,52 @@ bool comp(const pair<int,int> &a, const pair<int,int> &b) { return (a.second < b
 void print(vector<int> vec){ for(int i=0; i<vec.size(); i++) {cout << vec[i]<<" ";} cout<<endl;}
 void printv(ll v[], int n) { for(int i=1; i<=n; i++) { cout << v[i] <<" "; } line;}
 
-const int N = 3e5+10;
+using namespace std;
 
-ll n, k, l, p, q, m, d, x, y;
-// string s, t;
-// vector<pll>v;
-ll a[N], b[N];
+const int N = 2e5 + 2 ; 
+vector<int>adj[N];
+int vis[N] = {0};
+ll n, m;
 
-void solve() {
-    cin >> n >> q;
-    for(int i=0; i<n; i++) {
-        cin >> a[i];
+void input() {
+    // int n, m;
+    cin >> n >> m;
+
+    for(int i=0; i<m; i++) {
+        int u, v;
+        cin >> u >> v;
+        adj[v].push_back(u);
+        adj[u].push_back(v);
     }
-    for(int i=1; i<=n; i++) {
-        b[i] = b[i-1] + a[i-1];
+}
+
+bool dfs(int node, int parent) {
+    vis[node] = 1;
+
+    for(auto i:adj[node]) {  
+        if(!vis[i]) {
+            if(dfs(i, node)) {
+                return true;
+            }
+        }
+        else if(i != parent ) {
+            return true;
+        }
     }
-    // printv(b, n);
-    // instead of arr elements, store max height till that level so that we can directly 
-    // calculate its upper bound
-    for(int i=1; i<=n; i++) {
-        a[i] = max(a[i], a[i-1]);
-    }
-    for(int i=0; i<q; i++) {
-        cin >> k;
-        int idx = upper_bound(a, a+n, k) - a;
-        cout << b[idx] <<" ";
-    }
-    line;
+    return false;
 }
 
 int main() {
-    fast;
-    ll t;
-    cin >> t;
-    while(t--) {
-        solve();
-        // clear_global();
+    input();
+    ll cnt = 0;
+    for(int i=1; i<=n; i++) {
+        if(!vis[i]) {
+            if(dfs(i, -1) == false) {
+                cnt++;
+            }
+        }
     }
-    // solve();
+    cout << cnt; line;
     return 0;
 }
+

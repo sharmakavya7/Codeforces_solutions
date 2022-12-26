@@ -53,25 +53,25 @@ ll n, k, l, p, q, m, d, x, y;
 ll a[N], b[N];
 
 void solve() {
-    cin >> n >> q;
-    for(int i=0; i<n; i++) {
-        cin >> a[i];
+    int n;
+    string a, b;
+    cin >> n >> a >> b;
+    int x = 0, y = 0, cnt = 0, z = n+1;
+    for (int i=0;i<n;i++) {
+        if (a[i]=='1') 
+            x++;
+        if (b[i]=='1') 
+            y++;
+        if (a[i]!=b[i]) 
+            cnt++;
     }
-    for(int i=1; i<=n; i++) {
-        b[i] = b[i-1] + a[i-1];
-    }
-    // printv(b, n);
-    // instead of arr elements, store max height till that level so that we can directly 
-    // calculate its upper bound
-    for(int i=1; i<=n; i++) {
-        a[i] = max(a[i], a[i-1]);
-    }
-    for(int i=0; i<q; i++) {
-        cin >> k;
-        int idx = upper_bound(a, a+n, k) - a;
-        cout << b[idx] <<" ";
-    }
-    line;
+    if (x == y) 
+        z = min(z, cnt);
+    if (n - x + 1 == y) 
+        z = min(z, n-cnt);
+    if (z == n+1) 
+        z =- 1;
+    cout << z; line;
 }
 
 int main() {
@@ -85,3 +85,4 @@ int main() {
     // solve();
     return 0;
 }
+

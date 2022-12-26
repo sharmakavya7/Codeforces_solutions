@@ -19,6 +19,7 @@
 #include <deque>
 #include <queue>
 #include <stack>
+#include <regex>
 using namespace std;
  
 # define D double
@@ -38,40 +39,40 @@ using namespace std;
 # define line cout<<"\n";
 # define fast ios_base::sync_with_stdio(false); cin.tie(0);
 
-const int mod = (int)1e9+7;
 // two coprimes' gcd = 1
 ll __gcd(ll a,ll b) { if(a!=0)return __gcd(b%a,a); return b; }
 bool comp(const pair<int,int> &a, const pair<int,int> &b) { return (a.second < b.second); }
 void print(vector<int> vec){ for(int i=0; i<vec.size(); i++) {cout << vec[i]<<" ";} cout<<endl;}
-void printv(ll v[], int n) { for(int i=1; i<=n; i++) { cout << v[i] <<" "; } line;}
+void printv(ll v[], ll n) { for(int i=0; i<n; i++) { cout << v[i] <<" "; } line;}
 
-const int N = 3e5+10;
+const int mod = (int)1e9+7;
+const int N = 2e5+10;
 
-ll n, k, l, p, q, m, d, x, y;
-// string s, t;
+// int n, k, l, p, q, m, d, x, y;
+// string s, b;
 // vector<pll>v;
-ll a[N], b[N];
+// ll a[N][N];
+// int a[N], degree[N];
 
 void solve() {
-    cin >> n >> q;
-    for(int i=0; i<n; i++) {
-        cin >> a[i];
+    int n, k;
+    cin >> n >> k;
+    string s;
+    cin >> s;
+    vector<int> cnt(26);
+    for (char c : s) {
+        cnt[(c - 'a')] += 1;
     }
-    for(int i=1; i<=n; i++) {
-        b[i] = b[i-1] + a[i-1];
+    string res = "";
+    for (int i = 0; i < k; i++) {
+        int c = 0;
+        while (c < n / k && cnt[c] > 0) {
+            cnt[c] -= 1;
+            c += 1;
+        }
+        res += (c + 'a');
     }
-    // printv(b, n);
-    // instead of arr elements, store max height till that level so that we can directly 
-    // calculate its upper bound
-    for(int i=1; i<=n; i++) {
-        a[i] = max(a[i], a[i-1]);
-    }
-    for(int i=0; i<q; i++) {
-        cin >> k;
-        int idx = upper_bound(a, a+n, k) - a;
-        cout << b[idx] <<" ";
-    }
-    line;
+    cout << res ; line;
 }
 
 int main() {
