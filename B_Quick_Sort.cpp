@@ -77,20 +77,3 @@ int main() {
     // solve();
     return 0;
 }
-
-/*
-int dip = 0;
-    for(int i=1; i<n; i++) {
-        if(a[i-1] > a[i]) {
-            // dip
-            int num = a[i-1];
-            cout << num << " ";
-            auto it = a.begin() + i-1;
-            a.erase(it);
-            a.push_back(num);
-            dip++;
-        }
-    }
-    cout << dip ; line;
-*/
-

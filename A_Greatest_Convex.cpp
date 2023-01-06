@@ -45,7 +45,7 @@ bool comp(const pair<int,int> &a, const pair<int,int> &b) { return (a.second < b
 void print(vector<int> vec){ for(int i=0; i<vec.size(); i++) {cout << vec[i]<<" ";} cout<<endl;}
 void printv(ll v[], int n) { for(int i=1; i<=n; i++) { cout << v[i] <<" "; } line;}
 
-const int N = 2e5 + 2 ; 
+const int N = 2e5 + 2; 
 
 void solve () {
     ll k;
