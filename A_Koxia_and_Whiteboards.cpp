@@ -89,26 +89,3 @@ int main() {
     // solve();
     return 0;
 }
-
-/*
-ll sum = 0;
-    if(n > m) {
-        // ll sum = 0;
-        for(int i=0; i<m; i++) {
-            sum += b[i];
-            // cout <<"b[i] " << b[i] <<" sum:"<<sum <<" ";
-        }
-        for(int i=0; i<n-m; i++) {
-            // cout <<"a[i] " << a[i] <<" ";
-            sum += a[i];
-        }
-        
-    } else {
-        // ll sum = 0;
-        for(int i=0; i<n; i++) {
-            // cout << "b[i] " << b[i] <<" ";
-            sum += b[i];
-        }
-    }
-    cout << sum ; line;
-*/

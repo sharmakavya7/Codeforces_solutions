@@ -61,7 +61,7 @@ void solve() {
     }
     int i = 1,  j = n;
 
-    while(i<=j) {
+    while(i <= j) {
         if(n % 2 != 0 && i == j) {
             cout << i <<" ";
             break;
