@@ -71,7 +71,7 @@ void solve () {
                 cout << -(n/2 - 1) <<" ";
             }
         }
-        line
+        line;
     }
     
 }

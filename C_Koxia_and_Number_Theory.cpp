@@ -85,7 +85,7 @@ void solve () {
             return;
         }
     }
-    cout << "YES"; line
+    cout << "YES"; line;
 
 }
 
