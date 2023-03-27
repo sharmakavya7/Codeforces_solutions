@@ -50,20 +50,24 @@ void printv(int v[], int n) { for(int i=0; i<n; i++) { cout << v[i] <<" "; } lin
 const int N = 2e5 + 10; 
 int a[N];
 
-string solve () {
-    string str1, str2;
-    cin >> str1 >> str2;
-    string ans ;
-    if (str1.length() != str2.length()) {
-        ans = "NO";
-        return ans;
+void solve () {
+    string s;
+    cin >> s;
+    int maxi = 0, cnt=1;
+    for(int i=1; i<s.size(); i++) {
+        if(s[i] == s[i-1]) {
+            cnt++;
+            if(cnt == 7)  {
+                cout <<"YES"; line;
+                return;
+            }
+        }
+        else {
+            cnt=1;
+        }
+        // maxi = max(maxi, cnt);
     }
-    string temp = str1 + str1;
-    if(temp.find(str2) != string::npos) {
-        ans = "TES";
-    }
-    else ans = "NO";
-    return ans;
+    cout << "NO"; line;
 }
 
 int main() {
@@ -74,7 +78,6 @@ int main() {
     //     solve();
     //     // clear_global();
     // }
-    string ans = solve();
-    cout << ans;
+    solve();
     return 0;
 }

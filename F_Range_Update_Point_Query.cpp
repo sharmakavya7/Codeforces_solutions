@@ -1,5 +1,3 @@
-
-
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -47,34 +45,61 @@ bool comp(const pair<int,int> &a, const pair<int,int> &b) { return (a.second < b
 void print(vector<int> vec){ for(int i=0; i<vec.size(); i++) {cout << vec[i]<<" ";} cout<<endl;}
 void printv(int v[], int n) { for(int i=0; i<n; i++) { cout << v[i] <<" "; } line;}
 
-const int N = 2e5 + 10; 
-int a[N];
+const int N = 101; 
+// int a[N][N];
 
-string solve () {
-    string str1, str2;
-    cin >> str1 >> str2;
-    string ans ;
-    if (str1.length() != str2.length()) {
-        ans = "NO";
-        return ans;
+int f(int x){
+    if(x<10)
+        return x;
+    else 
+        return x%10+f(x/10);
+}
+
+void solve () {
+    int n,q;
+    cin >> n >> q;
+    vector<int>arr(n+1);
+    for(int i = 1; i<=n; i++){
+        cin >> arr[i];
     }
-    string temp = str1 + str1;
-    if(temp.find(str2) != string::npos) {
-        ans = "TES";
+    set<int>s;
+    for(int i = 1; i<=n; i++){
+        s.insert(i);
     }
-    else ans = "NO";
-    return ans;
+    while(q--){
+        int cc;
+        cin >> cc;
+        if(cc == 1){
+            int l,r;
+            cin >> l >> r;
+            while(true){
+                auto it = s.lower_bound(l);
+                if(it==s.end())
+                    break;
+                if((*it)>r)
+                    break;
+                arr[*it] = f(arr[*it]);
+                l = (*it)+1;
+                if(arr[*it]<10)
+                    s.erase(it);
+            }
+        }
+        else{
+            int x;
+            cin >> x;
+            cout << arr[x]; line
+        }
+    }
 }
 
 int main() {
     fast;
-    // ll t;
-    // cin >> t;
-    // while(t--) {
-    //     solve();
-    //     // clear_global();
-    // }
-    string ans = solve();
-    cout << ans;
+    ll t;
+    cin >> t;
+    while(t--) {
+        solve();
+        // clear_global();
+    }
+    // solve();
     return 0;
 }

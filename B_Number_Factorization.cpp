@@ -1,5 +1,3 @@
-
-
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -47,34 +45,49 @@ bool comp(const pair<int,int> &a, const pair<int,int> &b) { return (a.second < b
 void print(vector<int> vec){ for(int i=0; i<vec.size(); i++) {cout << vec[i]<<" ";} cout<<endl;}
 void printv(int v[], int n) { for(int i=0; i<n; i++) { cout << v[i] <<" "; } line;}
 
-const int N = 2e5 + 10; 
-int a[N];
+const int N = 101; 
+int a[N][N];
 
-string solve () {
-    string str1, str2;
-    cin >> str1 >> str2;
-    string ans ;
-    if (str1.length() != str2.length()) {
-        ans = "NO";
-        return ans;
+void solve () {
+    int n;
+    cin>>n;
+    vector<pii> arr;
+    for(int i=2;i*i<=n;i++){
+        int cnt=0;
+        while(n%i==0){
+            cnt++;
+            n/=i;
+        }
+        if(cnt > 0)
+            arr.push_back({i,cnt});
     }
-    string temp = str1 + str1;
-    if(temp.find(str2) != string::npos) {
-        ans = "TES";
+    if(n > 1)
+        arr.push_back({n,1});
+
+    int res = 0;
+    while(true){
+        int prod=1;
+        for(auto &i:arr){
+            if(i.second>0){
+                prod*=i.first;
+                i.second--;
+            }
+        }
+        if(prod==1)
+            break;
+        res+=prod;
     }
-    else ans = "NO";
-    return ans;
+    cout << res;line
 }
 
 int main() {
     fast;
-    // ll t;
-    // cin >> t;
-    // while(t--) {
-    //     solve();
-    //     // clear_global();
-    // }
-    string ans = solve();
-    cout << ans;
+    ll t;
+    cin >> t;
+    while(t--) {
+        solve();
+        // clear_global();
+    }
+    // solve();
     return 0;
 }

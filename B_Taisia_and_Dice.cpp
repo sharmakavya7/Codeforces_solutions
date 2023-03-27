@@ -50,31 +50,52 @@ void printv(int v[], int n) { for(int i=0; i<n; i++) { cout << v[i] <<" "; } lin
 const int N = 2e5 + 10; 
 int a[N];
 
-string solve () {
-    string str1, str2;
-    cin >> str1 >> str2;
-    string ans ;
-    if (str1.length() != str2.length()) {
-        ans = "NO";
-        return ans;
+void solve () {
+    int n, s, r;
+    cin >> n >> s >>r;
+    int l = n;
+    int cnt=0;
+    int max_ele = s - r;
+    cout << max_ele <<" ";
+    l--;
+    s = r;
+    s -= l;
+
+    while(l--) {
+        if(s/max_ele > 0) {
+            cout << max_ele <<" ";
+            s -= (max_ele-1);
+        }
+        else {
+            cout << 1 + s % max_ele << " ";
+            s -= (s % max_ele);
+        }
     }
-    string temp = str1 + str1;
-    if(temp.find(str2) != string::npos) {
-        ans = "TES";
-    }
-    else ans = "NO";
-    return ans;
+    line;
 }
 
 int main() {
     fast;
-    // ll t;
-    // cin >> t;
-    // while(t--) {
-    //     solve();
-    //     // clear_global();
-    // }
-    string ans = solve();
-    cout << ans;
+    ll t;
+    cin >> t;
+    while(t--) {
+        solve();
+        // clear_global();
+    }
+    // solve();
     return 0;
 }
+/*
+if(r - n - 1 > 0) {
+        int rem = r - n - 1;
+        cout << rem <<" ";
+        cnt += rem;
+    }
+    
+    for(int i=0; i<=n-4; i++) {
+        cout << "1 ";
+        cnt+=1;
+    }
+    cout << s - cnt <<" ";
+    line;
+*/

@@ -1,5 +1,3 @@
-
-
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -21,6 +19,7 @@
 #include <deque>
 #include <queue>
 #include <stack>
+#include <regex>
 using namespace std;
  
 # define D double
@@ -39,31 +38,58 @@ using namespace std;
 # define S second
 # define line cout<<"\n";
 # define fast ios_base::sync_with_stdio(false); cin.tie(0);
+#define maxh priority_queue<ll>
+#define minh priority_queue<ll,vector<ll>,greater<ll>>
+#define yes cout<<"YES"<<endl
+#define no cout<<"NO"<<endl
 
-const int mod = (int)1e9+7;
 // two coprimes' gcd = 1
 ll __gcd(ll a,ll b) { if(a!=0)return __gcd(b%a,a); return b; }
 bool comp(const pair<int,int> &a, const pair<int,int> &b) { return (a.second < b.second); }
 void print(vector<int> vec){ for(int i=0; i<vec.size(); i++) {cout << vec[i]<<" ";} cout<<endl;}
-void printv(int v[], int n) { for(int i=0; i<n; i++) { cout << v[i] <<" "; } line;}
+void printv(ll v[], ll n) { for(int i=0; i<n; i++) { cout << v[i] <<" "; } line;}
+bool isprime(int n){for(int i=2;i*i<=n;i++){if(n%i==0)return 0;}return 1;}
 
-const int N = 2e5 + 10; 
-// int a[N][N];
+const int mod = (int)1e9+7;
+const int N = 2e5 + 5 ;  
 
-void solve () {
-    ll int n;
-    cin >> n;
-    ll ans=0, mx=0, x;
-    for(int i=0; i<n;i++) {
-        cin>>x;
-        ans += x;
+void solve() {
+    int n; 
+    cin >> n; 
+    vector<int> freq(n);
+    int cnt = 0;
+    for(int i=0; i<n; i++) {
+        int a;
+        cin >> a;
+        freq[a]++;
+        if(freq[a] == 1) {
+            cnt++;
+        }
     }
-    for(int i=0; i<n; i++){
-        cin >> x;
-        ans += x;
-        mx = max(mx,x);
+    // cout << cnt ; line
+    int ans = 0;
+    // print(freq); 
+    // size of first team can't exceed cnt and second team can't exceed max(freq of all the skills)
+    // aur in dono ke min se bada hmara ans nhi ho skta
+    for(int i=1; i<=n; i++) {
+        if(freq[i] == 0) {
+            continue;
+        }
+        int u = cnt - 1;
+        int f = freq[i];
+
+        if(f > u) {
+            f--;
+            u++;
+        }
+
+        int temp = min(f, u);
+        ans = max(ans, temp);
     }
-    cout << ans-mx ; line
+    cout << ans; line;
+    // for(int i=1; i<=n; i++) {
+    //     freq[i] = 0;
+    // }
 }
 
 int main() {

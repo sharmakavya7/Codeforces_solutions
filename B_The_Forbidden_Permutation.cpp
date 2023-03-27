@@ -1,5 +1,3 @@
-
-
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -47,34 +45,57 @@ bool comp(const pair<int,int> &a, const pair<int,int> &b) { return (a.second < b
 void print(vector<int> vec){ for(int i=0; i<vec.size(); i++) {cout << vec[i]<<" ";} cout<<endl;}
 void printv(int v[], int n) { for(int i=0; i<n; i++) { cout << v[i] <<" "; } line;}
 
-const int N = 2e5 + 10; 
-int a[N];
+const int N = 101; 
+// int a[N][N];
 
-string solve () {
-    string str1, str2;
-    cin >> str1 >> str2;
-    string ans ;
-    if (str1.length() != str2.length()) {
-        ans = "NO";
-        return ans;
+void solve () {
+    int n, m, d;
+    cin >> n >> m >> d;
+    ll p[n],a[m];
+    for(int i=0; i<n; i++) {
+        cin >> p[i];
     }
-    string temp = str1 + str1;
-    if(temp.find(str2) != string::npos) {
-        ans = "TES";
+    for(int i=0; i<m; i++) {
+        cin >> a[i];
     }
-    else ans = "NO";
-    return ans;
+    map<ll,ll>mp;
+    for(int i=0; i<n; i++){
+        mp[p[i]]=i;
+    }
+    ll cnt=0;
+    for(int i=0 ; i <m-1; i++){
+        // all three relations if koi bhi ye inequalities fulfil nhi kia then ans = 0
+        if(mp[a[i+1]] > mp[a[i]] && mp[a[i+1]] <= mp[a[i]] + d) {
+            cnt++;
+        }
+    }
+    if(cnt >= m-1){
+        ll ans = INT_MAX;
+        for(int i=0 ; i<m-1; i++){
+            ll a1 = mp[a[i+1]] - mp[a[i]];
+            if(d+1 > n-1) {
+                ans = min(ans,a1);
+            } else {
+                ll a2 = (d+1) - a1;
+                ans = min(ans,min(a1,a2));
+            }
+        }
+        cout<<ans; line
+    }
+    else {
+        cout<<0; line
+    }
+
 }
 
 int main() {
     fast;
-    // ll t;
-    // cin >> t;
-    // while(t--) {
-    //     solve();
-    //     // clear_global();
-    // }
-    string ans = solve();
-    cout << ans;
+    ll t;
+    cin >> t;
+    while(t--) {
+        solve();
+        // clear_global();
+    }
+    // solve();
     return 0;
 }

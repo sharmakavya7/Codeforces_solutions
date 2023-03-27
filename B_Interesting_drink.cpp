@@ -1,5 +1,3 @@
-
-
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -21,6 +19,7 @@
 #include <deque>
 #include <queue>
 #include <stack>
+#include <regex>
 using namespace std;
  
 # define D double
@@ -39,31 +38,41 @@ using namespace std;
 # define S second
 # define line cout<<"\n";
 # define fast ios_base::sync_with_stdio(false); cin.tie(0);
+#define maxh priority_queue<ll>
+#define minh priority_queue<ll,vector<ll>,greater<ll>>
+#define yes cout<<"YES"<<endl
+#define no cout<<"NO"<<endl
 
-const int mod = (int)1e9+7;
 // two coprimes' gcd = 1
 ll __gcd(ll a,ll b) { if(a!=0)return __gcd(b%a,a); return b; }
 bool comp(const pair<int,int> &a, const pair<int,int> &b) { return (a.second < b.second); }
 void print(vector<int> vec){ for(int i=0; i<vec.size(); i++) {cout << vec[i]<<" ";} cout<<endl;}
-void printv(int v[], int n) { for(int i=0; i<n; i++) { cout << v[i] <<" "; } line;}
+void printv(ll v[], ll n) { for(int i=0; i<n; i++) { cout << v[i] <<" "; } line;}
+bool isprime(int n){for(int i=2;i*i<=n;i++){if(n%i==0)return 0;}return 1;}
 
-const int N = 2e5 + 10; 
-int a[N];
+const int mod = (int)1e9+7;
+const int N = 2e5 + 5 ;  
 
-string solve () {
-    string str1, str2;
-    cin >> str1 >> str2;
-    string ans ;
-    if (str1.length() != str2.length()) {
-        ans = "NO";
-        return ans;
+void solve() {
+    int n; 
+    cin >> n; 
+    vector<int>v(n);
+
+    for(int i=0; i<n; i++) {
+        cin >> v[i];
     }
-    string temp = str1 + str1;
-    if(temp.find(str2) != string::npos) {
-        ans = "TES";
+
+    sort(all(v));
+
+    int m;
+    cin >> m;
+    while(m--) {
+        int money;
+        cin >> money;
+
+        int ub = upper_bound(all(v), money) - v.begin();
+        cout << ub ; line
     }
-    else ans = "NO";
-    return ans;
 }
 
 int main() {
@@ -74,7 +83,6 @@ int main() {
     //     solve();
     //     // clear_global();
     // }
-    string ans = solve();
-    cout << ans;
+    solve();
     return 0;
 }

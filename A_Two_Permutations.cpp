@@ -50,31 +50,28 @@ void printv(int v[], int n) { for(int i=0; i<n; i++) { cout << v[i] <<" "; } lin
 const int N = 2e5 + 10; 
 int a[N];
 
-string solve () {
-    string str1, str2;
-    cin >> str1 >> str2;
-    string ans ;
-    if (str1.length() != str2.length()) {
-        ans = "NO";
-        return ans;
+void solve () {
+    int n,a,b;
+    cin >> n >> a >> b;
+    if(a == n && b == n){
+        cout<<"YES\n";
     }
-    string temp = str1 + str1;
-    if(temp.find(str2) != string::npos) {
-        ans = "TES";
+    else if(n - (a + b) > 1) {
+        cout<<"YES\n";
     }
-    else ans = "NO";
-    return ans;
+    else {
+        cout<<"NO\n";
+    }
 }
 
 int main() {
     fast;
-    // ll t;
-    // cin >> t;
-    // while(t--) {
-    //     solve();
-    //     // clear_global();
-    // }
-    string ans = solve();
-    cout << ans;
+    ll t;
+    cin >> t;
+    while(t--) {
+        solve();
+        // clear_global();
+    }
+    // solve();
     return 0;
 }

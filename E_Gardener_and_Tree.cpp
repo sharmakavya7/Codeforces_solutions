@@ -1,5 +1,3 @@
-
-
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -47,34 +45,68 @@ bool comp(const pair<int,int> &a, const pair<int,int> &b) { return (a.second < b
 void print(vector<int> vec){ for(int i=0; i<vec.size(); i++) {cout << vec[i]<<" ";} cout<<endl;}
 void printv(int v[], int n) { for(int i=0; i<n; i++) { cout << v[i] <<" "; } line;}
 
-const int N = 2e5 + 10; 
-int a[N];
+const int N = 400000 + 5; 
+int deg[N], rnk[N], n, k;
+vector<int>G[N];
 
-string solve () {
-    string str1, str2;
-    cin >> str1 >> str2;
-    string ans ;
-    if (str1.length() != str2.length()) {
-        ans = "NO";
-        return ans;
+void toposort() {
+    queue<int> q;
+    for(int i = 1; i <= n; i++) {
+        if(deg[i] == 1) {
+            q.push(i);
+            rnk[i] = 1;
+        }
     }
-    string temp = str1 + str1;
-    if(temp.find(str2) != string::npos) {
-        ans = "TES";
+    while(!q.empty()) {
+        int u = q.front(); 
+        q.pop();
+ 
+        for(int i = 0; i < G[u].size(); i++) {
+            int v = G[u][i];
+            deg[v]--;
+            if(deg[v] == 1) {
+                rnk[v] = rnk[u] + 1;
+                q.push(v);
+                // deg[v]--;
+            }
+        }
     }
-    else ans = "NO";
-    return ans;
+}
+
+void solve () {
+    memset(deg, 0, sizeof(deg));
+    memset(rnk, 0, sizeof(rnk));
+
+    cin >> n >> k;
+    for(int i = 1; i <= n; i++) {
+        G[i].clear();
+    }
+    for(int i = 1; i <= n - 1; i++) {
+        int u, v;
+        cin >> u >> v;
+        G[u].push_back(v);
+        G[v].push_back(u);
+        deg[u]++; 
+        deg[v]++;
+    }
+    toposort();
+    int ans = n;
+    for(int i = 1; i <= n; i++) {
+        if(rnk[i] <= k) {
+            ans--;
+        }
+    }
+    cout << ans << endl;
 }
 
 int main() {
     fast;
-    // ll t;
-    // cin >> t;
-    // while(t--) {
-    //     solve();
-    //     // clear_global();
-    // }
-    string ans = solve();
-    cout << ans;
+    ll t;
+    cin >> t;
+    while(t--) {
+        solve();
+        // clear_global();
+    }
+    // solve();
     return 0;
 }

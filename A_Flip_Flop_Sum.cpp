@@ -1,5 +1,3 @@
-
-
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -47,34 +45,57 @@ bool comp(const pair<int,int> &a, const pair<int,int> &b) { return (a.second < b
 void print(vector<int> vec){ for(int i=0; i<vec.size(); i++) {cout << vec[i]<<" ";} cout<<endl;}
 void printv(int v[], int n) { for(int i=0; i<n; i++) { cout << v[i] <<" "; } line;}
 
-const int N = 2e5 + 10; 
-int a[N];
+const int N = 101; 
+// int a[N][N];
 
-string solve () {
-    string str1, str2;
-    cin >> str1 >> str2;
-    string ans ;
-    if (str1.length() != str2.length()) {
-        ans = "NO";
-        return ans;
+void solve () {
+    int n;
+    cin >> n;
+    int a[n];
+    int flag = 0, p = 0;
+    int sum = 0;
+    for(int i=0; i<n; i++) {
+        cin >> a[i];
+        sum += a[i];
+        if(a[i] == -1) {
+            p = 1;
+        }
     }
-    string temp = str1 + str1;
-    if(temp.find(str2) != string::npos) {
-        ans = "TES";
+    for(int i=1; i<n; i++) {
+        if(a[i-1] == -1 && a[i] == -1) {
+            flag = 1;
+            i+=2;
+            break;
+        }
     }
-    else ans = "NO";
-    return ans;
+    if(p == 0) {
+        sum -= 4;
+    }
+    // cout << sum <<" ";
+    if(flag == 1) {
+        sum += 4;
+    }
+    cout << sum ; line;
+    // for(int i=0; i<n; i++) {
+    //     if(a[i] == -1 && flag == 0) {
+    //         a[i] = 1;
+    //         cout << i <<" " << a[i] <<" ";
+    //         sum += a[i];
+    //         flag = 1;
+    //         continue;
+    //     }
+    //     sum += a[i];
+    // }
 }
 
 int main() {
     fast;
-    // ll t;
-    // cin >> t;
-    // while(t--) {
-    //     solve();
-    //     // clear_global();
-    // }
-    string ans = solve();
-    cout << ans;
+    ll t;
+    cin >> t;
+    while(t--) {
+        solve();
+        // clear_global();
+    }
+    // solve();
     return 0;
 }

@@ -40,7 +40,10 @@ using namespace std;
 # define line cout<<"\n";
 # define fast ios_base::sync_with_stdio(false); cin.tie(0);
 
-const int mod = (int)1e9+7;
+const int mod = 1e9 + 7 ;
+ 
+const int dx[] = { -1 , 0 , 1 , 0 } ;
+const int dy[] = { 0 , 1 , 0 , -1 } ;
 // two coprimes' gcd = 1
 ll __gcd(ll a,ll b) { if(a!=0)return __gcd(b%a,a); return b; }
 bool comp(const pair<int,int> &a, const pair<int,int> &b) { return (a.second < b.second); }
@@ -48,33 +51,49 @@ void print(vector<int> vec){ for(int i=0; i<vec.size(); i++) {cout << vec[i]<<" 
 void printv(int v[], int n) { for(int i=0; i<n; i++) { cout << v[i] <<" "; } line;}
 
 const int N = 2e5 + 10; 
-int a[N];
+// int a[N][N];
 
-string solve () {
-    string str1, str2;
-    cin >> str1 >> str2;
-    string ans ;
-    if (str1.length() != str2.length()) {
-        ans = "NO";
-        return ans;
+void solve () {
+    int n;
+    cin>>n;
+ 
+    vector<int> v(n);
+    for (auto &i:v) 
+        cin>>i;
+ 
+    int ans=0, k=0;
+    priority_queue<int> pq;
+    for (int i=0;i<n;i++) {
+        while (v[i]%2 == 0) {
+            v[i]/=2;
+            k++;
+        }
+
+        int id=i+1, m=0;
+        while (id%2 == 0) {
+            id/=2;
+            m++;
+        }
+        pq.push(m);
     }
-    string temp = str1 + str1;
-    if(temp.find(str2) != string::npos) {
-        ans = "TES";
+ 
+    while (k<n && !pq.empty()) {
+        k+=pq.top(); 
+        pq.pop();
+        ans++;
     }
-    else ans = "NO";
-    return ans;
+ 
+    cout<<((k<n) ? -1 : ans); line
 }
 
 int main() {
     fast;
-    // ll t;
-    // cin >> t;
-    // while(t--) {
-    //     solve();
-    //     // clear_global();
-    // }
-    string ans = solve();
-    cout << ans;
+    ll t;
+    cin >> t;
+    while(t--) {
+        solve();
+        // clear_global();
+    }
+    // solve();
     return 0;
 }

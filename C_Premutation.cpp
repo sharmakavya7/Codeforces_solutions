@@ -47,34 +47,48 @@ bool comp(const pair<int,int> &a, const pair<int,int> &b) { return (a.second < b
 void print(vector<int> vec){ for(int i=0; i<vec.size(); i++) {cout << vec[i]<<" ";} cout<<endl;}
 void printv(int v[], int n) { for(int i=0; i<n; i++) { cout << v[i] <<" "; } line;}
 
-const int N = 2e5 + 10; 
-int a[N];
+const int N = 101; 
+int a[N][N];
 
-string solve () {
-    string str1, str2;
-    cin >> str1 >> str2;
-    string ans ;
-    if (str1.length() != str2.length()) {
-        ans = "NO";
-        return ans;
+void solve () {
+    int n;
+    cin >> n;
+
+    for(int i=0; i<n; i++) {
+        for(int j=0; j<n-1; j++) {
+            cin >> a[i][j];
+        }
     }
-    string temp = str1 + str1;
-    if(temp.find(str2) != string::npos) {
-        ans = "TES";
+    unordered_map<int, int>mp;
+    for(int i=0; i<n;i ++) {
+        mp[a[i][0]]++;
     }
-    else ans = "NO";
-    return ans;
+    int maxi = 0;
+    for(auto i : mp) {
+        if(maxi < i.second) {
+            maxi = i.first;
+        }
+    }
+    for(int i=0; i<n; i++) {
+        if(a[i][0] != maxi) {
+            cout << a[i][0];
+        }
+    }
+    for(int i=0; i<n; i++) {
+        for(int j=1; j<n-1; j++) {
+            
+        }
+    }
 }
 
 int main() {
     fast;
-    // ll t;
-    // cin >> t;
-    // while(t--) {
-    //     solve();
-    //     // clear_global();
-    // }
-    string ans = solve();
-    cout << ans;
+    ll t;
+    cin >> t;
+    while(t--) {
+        solve();
+        // clear_global();
+    }
+    // solve();
     return 0;
 }

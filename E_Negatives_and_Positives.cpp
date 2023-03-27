@@ -1,5 +1,3 @@
-
-
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -47,34 +45,51 @@ bool comp(const pair<int,int> &a, const pair<int,int> &b) { return (a.second < b
 void print(vector<int> vec){ for(int i=0; i<vec.size(); i++) {cout << vec[i]<<" ";} cout<<endl;}
 void printv(int v[], int n) { for(int i=0; i<n; i++) { cout << v[i] <<" "; } line;}
 
-const int N = 2e5 + 10; 
-int a[N];
+const int N = 101; 
+// int a[N][N];
 
-string solve () {
-    string str1, str2;
-    cin >> str1 >> str2;
-    string ans ;
-    if (str1.length() != str2.length()) {
-        ans = "NO";
-        return ans;
+void solve () {
+    ll n;
+    cin >> n;
+    ll a[n];
+    ll neg = 0;
+    ll prevsum =0;
+    for(int i=0; i<n; i++) {
+        cin >> a[i];
+        if(a[i] < 0) {
+            neg++;
+        }
     }
-    string temp = str1 + str1;
-    if(temp.find(str2) != string::npos) {
-        ans = "TES";
+    ll plusmesabsechhota = 1e9;
+    for(int i=0; i<n; i++) {
+
+        if(plusmesabsechhota > abs(a[i])) {
+            plusmesabsechhota = abs(a[i]);
+        }
     }
-    else ans = "NO";
-    return ans;
+    for(int i=0; i<n; i++) {
+        prevsum += abs(a[i]);
+    }
+    if(neg == 0) {
+        cout << prevsum; line
+        return;
+    }
+    // cout << plusmesabsechhota <<" ";
+    if(neg % 2 != 0) {
+        prevsum -= (2*plusmesabsechhota);
+    }
+    // cout << prevsum <<" " ;
+    cout <<  prevsum; line;
 }
 
 int main() {
     fast;
-    // ll t;
-    // cin >> t;
-    // while(t--) {
-    //     solve();
-    //     // clear_global();
-    // }
-    string ans = solve();
-    cout << ans;
+    ll t;
+    cin >> t;
+    while(t--) {
+        solve();
+        // clear_global();
+    }
+    // solve();
     return 0;
 }

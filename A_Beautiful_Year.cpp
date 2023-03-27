@@ -49,27 +49,37 @@ vector<int>v;
 int cnt = 0, sum = 0, res = 0;
 int matrix[5][5];
 
-void solve() {
-    cin >> s;
-    unordered_map<char, int>m;
-    int n = s.size();
-    for(auto i=0; i< n; i++) {
-        m[s[i]]++;
-        while(m.size() < 4) {
-            s[n-1] = s[n-1]-'a' + 1;
-        }
-    }
-    cout << s;
-}
+// void solve() {
+//     cin >> s;
+//     unordered_map<char, int>m;
+//     int n = s.size();
+//     for(auto i=0; i< n; i++) {
+//         m[s[i]]++;
+//         while(m.size() < 4) {
+//             s[n-1] = s[n-1]-'a' + 1;
+//         }
+//     }
+//     cout << s;
+// }
 
 
 int main() {
     fast;
-    // ll t;
-    // cin >> t;
-    // while(t--) {
-    //     solve();
-    // }
-    solve();
+    int y;
+    cin>>y;
+    
+    while(true) {
+        y++;
+        string s = to_string(y);
+        unordered_set<char> st;
+
+        for(auto x: s) 
+            st.insert(x);
+
+        if(st.size() == 4) {
+            cout<<y<<endl;
+            break;
+        }
+    }
     return 0;
 }
